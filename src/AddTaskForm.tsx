@@ -6,19 +6,46 @@ export default function AddTaskForm({ cols, onAddTask }) {
 
     function handleAddTask(e) {
         e.preventDefault();
-        onAddTask(taskText, status);
-        setStatus("");
-        setTaskText("");
+        if (taskText.trim() && status) {
+            onAddTask(taskText, status);
+            setStatus("");
+            setTaskText("");
+        }
     }
 
-    return <form onSubmit={handleAddTask}>
-        <input type="text" value={taskText} onChange={e => setTaskText(e.target.value)} />
-        <select value={status} onChange={e => setStatus(e.target.value)}>
-            <option value="">Status</option>
-            {cols.map((col) => {
-                return <option key={col} value={col}>{col}</option>
-            })}
-        </select>
-        <button type="submit">Add</button>
-    </form>
+    return (
+        <div className="add-task-form">
+            <h2>Add New Task</h2>
+            <form onSubmit={handleAddTask} className="form">
+                <div className="form-group">
+                    <input
+                        type="text"
+                        value={taskText}
+                        onChange={e => setTaskText(e.target.value)}
+                        placeholder="Enter task description..."
+                        className="form-input"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <select
+                        value={status}
+                        onChange={e => setStatus(e.target.value)}
+                        className="form-select"
+                        required
+                    >
+                        <option value="">Select Status</option>
+                        {cols.map((col) => {
+                            return <option key={col} value={col}>
+                                {col.charAt(0).toUpperCase() + col.slice(1)}
+                            </option>
+                        })}
+                    </select>
+                </div>
+                <button type="submit" className="form-button" disabled={!taskText.trim() || !status}>
+                    Add Task
+                </button>
+            </form>
+        </div>
+    );
 }
