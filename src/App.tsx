@@ -36,15 +36,15 @@ function App() {
 
   function moveTask(taskId, fromColumn, toColumn) {
     if (fromColumn === toColumn) return;
-    
+
     setData(prev => {
       const updatedColumns = { ...prev.columns };
       updatedColumns[fromColumn] = updatedColumns[fromColumn].filter(id => id !== taskId);
       updatedColumns[toColumn] = [...updatedColumns[toColumn], taskId];
-      
+
       const updatedTasks = { ...prev.tasks };
       updatedTasks[taskId] = { ...updatedTasks[taskId], status: toColumn };
-      
+
       return {
         tasks: updatedTasks,
         columns: updatedColumns
@@ -54,7 +54,7 @@ function App() {
 
   return (
     <div className="app">
-      <div>
+      <div className="form-container">
         <AddTaskForm cols={cols} onAddTask={addTask} />
       </div>
       <div className="columns">
