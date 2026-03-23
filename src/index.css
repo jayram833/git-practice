@@ -76,3 +76,15 @@
   opacity: 0.7;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+.task-card--todo {
+  border-left: 4px solid #dc3545;
+}
+
+.task-card--inprogress {
+  border-left: 4px solid #ffc107;
+}
+
+.task-card--done {
+  border-left: 4px solid #28a745;
+}
